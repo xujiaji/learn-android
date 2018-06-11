@@ -16,9 +16,14 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    
+    dataBinding {
+        enabled = true
+    }
 }
 
 dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     testImplementation "junit:junit:4.12"
     implementation "com.android.support:appcompat-v7:$support"
