@@ -1,6 +1,7 @@
 package com.xujiaji.learnmvvm.view.ui;
 
 import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
@@ -13,18 +14,24 @@ import android.view.ViewGroup;
 
 import com.xujiaji.learnmvvm.R;
 import com.xujiaji.learnmvvm.databinding.FragmentProjectDetailsBinding;
+import com.xujiaji.learnmvvm.di.Injectable;
 import com.xujiaji.learnmvvm.service.model.Project;
 import com.xujiaji.learnmvvm.viewmodel.ProjectViewModel;
+
+import javax.inject.Inject;
 
 /**
  * author: xujiaji
  * created on: 2018/6/12 10:43
  * description:
  */
-public class ProjectFragment extends Fragment
+public class ProjectFragment extends Fragment implements Injectable
 {
     private static final String KEY_PROJECT_ID = "project_id";
     private FragmentProjectDetailsBinding binding;
+
+    @Inject
+    ViewModelProvider.Factory viewModelFactory;
 
     @Nullable
     @Override
@@ -38,14 +45,13 @@ public class ProjectFragment extends Fragment
     public void onActivityCreated(@Nullable Bundle savedInstanceState)
     {
         super.onActivityCreated(savedInstanceState);
-        ProjectViewModel.Factory factory = new ProjectViewModel.Factory(
-                getActivity().getApplication(), getArguments().getString(KEY_PROJECT_ID));
-
-        final ProjectViewModel viewModel = ViewModelProviders.of(this, factory)
+        final ProjectViewModel viewModel = ViewModelProviders.of(this, viewModelFactory)
                 .get(ProjectViewModel.class);
+        viewModel.setProjectID(getArguments().getString(KEY_PROJECT_ID));
 
         binding.setProjectViewModel(viewModel);
         binding.setIsLoading(true);
+
         observeViewModel(viewModel);
     }
 
