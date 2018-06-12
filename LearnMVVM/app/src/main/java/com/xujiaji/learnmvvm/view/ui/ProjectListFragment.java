@@ -61,29 +61,21 @@ public class ProjectListFragment extends Fragment implements Injectable
 
     private void observeViewModel(ProjectListViewModel viewModel)
     {
-        viewModel.getProjectListObservable().observe(this, new Observer<List<Project>>()
+        viewModel.getProjectListObservable().observe(this, projects ->
         {
-            @Override
-            public void onChanged(@Nullable List<Project> projects)
+            if (projects != null)
             {
-                if (projects != null)
-                {
-                    binding.setIsLoading(false);
-                    projectAdapter.setProjectList(projects);
-                }
+                binding.setIsLoading(false);
+                projectAdapter.setProjectList(projects);
             }
         });
     }
 
-    private final ProjectClickCallback projectClickCallback = new ProjectClickCallback()
+    private final ProjectClickCallback projectClickCallback = project ->
     {
-        @Override
-        public void onClick(Project project)
+        if (getLifecycle().getCurrentState().isAtLeast(Lifecycle.State.STARTED) && getActivity() instanceof MainActivity)
         {
-            if (getLifecycle().getCurrentState().isAtLeast(Lifecycle.State.STARTED))
-            {
-                ((MainActivity) getActivity()).show(project);
-            }
+            ((MainActivity) getActivity()).show(project);
         }
     };
 }
