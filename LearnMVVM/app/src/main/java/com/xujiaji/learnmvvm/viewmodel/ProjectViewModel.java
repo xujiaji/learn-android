@@ -32,7 +32,7 @@ public class ProjectViewModel extends AndroidViewModel
     }
 
 
-    public LiveData<Project> getProjectObservable()
+    public LiveData<Project> getObservableProject()
     {
         return projectObservable;
     }

@@ -1,5 +1,6 @@
 package com.xujiaji.learnmvvm.view.ui;
 
+import android.arch.lifecycle.Lifecycle;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.databinding.DataBindingUtil;
@@ -14,6 +15,8 @@ import android.view.ViewGroup;
 import com.xujiaji.learnmvvm.R;
 import com.xujiaji.learnmvvm.databinding.FragmentProjectListBinding;
 import com.xujiaji.learnmvvm.service.model.Project;
+import com.xujiaji.learnmvvm.view.adapter.ProjectAdapter;
+import com.xujiaji.learnmvvm.view.callback.ProjectClickCallback;
 import com.xujiaji.learnmvvm.viewmodel.ProjectListViewModel;
 
 import java.util.List;
@@ -26,6 +29,7 @@ import java.util.List;
 public class ProjectListFragment extends Fragment
 {
     public static final String TAG = "ProjectListFragment";
+    private ProjectAdapter projectAdapter;
     private FragmentProjectListBinding binding;
 
     @Nullable
@@ -33,6 +37,8 @@ public class ProjectListFragment extends Fragment
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
     {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_project_list, container, false);
+        projectAdapter = new ProjectAdapter(projectClickCallback);
+        binding.projectList.setAdapter(projectAdapter);
         binding.setIsLoading(true);
         return binding.getRoot();
     }
@@ -56,8 +62,21 @@ public class ProjectListFragment extends Fragment
                 if (projects != null)
                 {
                     binding.setIsLoading(false);
+                    projectAdapter.setProjectList(projects);
                 }
             }
         });
     }
+
+    private final ProjectClickCallback projectClickCallback = new ProjectClickCallback()
+    {
+        @Override
+        public void onClick(Project project)
+        {
+            if (getLifecycle().getCurrentState().isAtLeast(Lifecycle.State.STARTED))
+            {
+                ((MainActivity) getActivity()).show(project);
+            }
+        }
+    };
 }

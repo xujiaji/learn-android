@@ -7,6 +7,8 @@ import com.xujiaji.learnmvvm.service.model.Project;
 
 import java.util.List;
 
+import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -25,8 +27,12 @@ public class NetRepository
 
     private NetRepository()
     {
+        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+        OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Api.URL)
+                .client(client)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
@@ -75,6 +81,7 @@ public class NetRepository
             @Override
             public void onResponse(Call<Project> call, Response<Project> response)
             {
+                simulateDelay();
                 data.setValue(response.body());
             }
 
