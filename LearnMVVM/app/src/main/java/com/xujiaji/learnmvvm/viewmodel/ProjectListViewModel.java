@@ -10,6 +10,8 @@ import com.xujiaji.learnmvvm.service.repository.NetRepository;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 /**
  * author: xujiaji
  * created on: 2018/6/11 22:11
@@ -19,11 +21,11 @@ public class ProjectListViewModel extends AndroidViewModel
 {
     private final LiveData<List<Project>> projectListObservable;
 
-    public ProjectListViewModel(@NonNull Application application)
+    @Inject
+    public ProjectListViewModel(@NonNull NetRepository netRepository, @NonNull Application application)
     {
         super(application);
-        projectListObservable = NetRepository.getInstance()
-                .getProjectList("xujiaji");
+        projectListObservable = netRepository.getProjectList("xujiaji");
     }
 
     public LiveData<List<Project>> getProjectListObservable()

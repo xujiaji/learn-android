@@ -32,4 +32,5 @@ ext{
     retrofit         = '2.0.2'
     arch             = '1.1.1'
     constraintLayout = '1.1.1'
+    dagger           = '2.11'
 }

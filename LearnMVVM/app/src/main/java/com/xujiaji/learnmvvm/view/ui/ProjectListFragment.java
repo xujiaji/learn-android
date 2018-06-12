@@ -2,6 +2,7 @@ package com.xujiaji.learnmvvm.view.ui;
 
 import android.arch.lifecycle.Lifecycle;
 import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
@@ -14,6 +15,7 @@ import android.view.ViewGroup;
 
 import com.xujiaji.learnmvvm.R;
 import com.xujiaji.learnmvvm.databinding.FragmentProjectListBinding;
+import com.xujiaji.learnmvvm.di.Injectable;
 import com.xujiaji.learnmvvm.service.model.Project;
 import com.xujiaji.learnmvvm.view.adapter.ProjectAdapter;
 import com.xujiaji.learnmvvm.view.callback.ProjectClickCallback;
@@ -21,16 +23,21 @@ import com.xujiaji.learnmvvm.viewmodel.ProjectListViewModel;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 /**
  * author: xujiaji
  * created on: 2018/6/11 22:30
  * description:
  */
-public class ProjectListFragment extends Fragment
+public class ProjectListFragment extends Fragment implements Injectable
 {
     public static final String TAG = "ProjectListFragment";
     private ProjectAdapter projectAdapter;
     private FragmentProjectListBinding binding;
+
+    @Inject
+    ViewModelProvider.Factory viewModelFactory;
 
     @Nullable
     @Override
@@ -48,7 +55,7 @@ public class ProjectListFragment extends Fragment
     {
         super.onActivityCreated(savedInstanceState);
         final ProjectListViewModel viewModel =
-                ViewModelProviders.of(this).get(ProjectListViewModel.class);
+                ViewModelProviders.of(this, viewModelFactory).get(ProjectListViewModel.class);
         observeViewModel(viewModel);
     }
 
