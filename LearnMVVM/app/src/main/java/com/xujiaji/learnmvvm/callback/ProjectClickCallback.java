@@ -1,4 +1,4 @@
-package com.xujiaji.learnmvvm.view.callback;
+package com.xujiaji.learnmvvm.callback;
 
 
 import com.xujiaji.learnmvvm.service.model.Project;

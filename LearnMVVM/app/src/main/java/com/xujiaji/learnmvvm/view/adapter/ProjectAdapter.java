@@ -12,7 +12,7 @@ import com.xujiaji.learnmvvm.R;
 import com.xujiaji.learnmvvm.databinding.ProjectListItemBinding;
 import com.xujiaji.learnmvvm.service.model.Project;
 import com.xujiaji.learnmvvm.util.Utils;
-import com.xujiaji.learnmvvm.view.callback.ProjectClickCallback;
+import com.xujiaji.learnmvvm.callback.ProjectClickCallback;
 
 import java.util.List;
 

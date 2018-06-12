@@ -18,7 +18,7 @@ import com.xujiaji.learnmvvm.databinding.FragmentProjectListBinding;
 import com.xujiaji.learnmvvm.di.Injectable;
 import com.xujiaji.learnmvvm.service.model.Project;
 import com.xujiaji.learnmvvm.view.adapter.ProjectAdapter;
-import com.xujiaji.learnmvvm.view.callback.ProjectClickCallback;
+import com.xujiaji.learnmvvm.callback.ProjectClickCallback;
 import com.xujiaji.learnmvvm.viewmodel.ProjectListViewModel;
 
 import java.util.List;

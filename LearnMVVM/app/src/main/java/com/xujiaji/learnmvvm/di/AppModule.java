@@ -3,7 +3,6 @@ package com.xujiaji.learnmvvm.di;
 import android.arch.lifecycle.ViewModelProvider;
 
 import com.xujiaji.learnmvvm.service.repository.Api;
-import com.xujiaji.learnmvvm.service.repository.NetRepository;
 import com.xujiaji.learnmvvm.viewmodel.ProjectViewModelFactory;
 
 import javax.inject.Singleton;
