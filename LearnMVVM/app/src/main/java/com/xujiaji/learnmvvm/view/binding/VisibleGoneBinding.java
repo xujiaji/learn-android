@@ -1,9 +1,9 @@
-package com.xujiaji.learnmvvm.view.adapter;
+package com.xujiaji.learnmvvm.view.binding;
 
 import android.databinding.BindingAdapter;
 import android.view.View;
 
-public class CustomBindingAdapter
+public class VisibleGoneBinding
 {
     @BindingAdapter("visibleGone")
     public static void showHide(View view, boolean show) {

@@ -1,12 +1,11 @@
-package com.xujiaji.learnmvvm.view.adapter;
+package com.xujiaji.learnmvvm.view.binding;
 
 import android.databinding.BindingAdapter;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 
 import com.xujiaji.learnmvvm.service.model.Project;
+import com.xujiaji.learnmvvm.view.adapter.ProjectAdapter;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -14,7 +13,7 @@ import java.util.List;
  * created on: 2018/6/13 16:21
  * description:
  */
-public class ListBindings
+public class ProjectListBindings
 {
     @BindingAdapter("app:items")
     public static void setItems(RecyclerView recyclerView, List<Project> items)
@@ -22,9 +21,6 @@ public class ListBindings
         ProjectAdapter adapter = (ProjectAdapter) recyclerView.getAdapter();
         if (adapter != null)
         {
-            Log.e("ListBindings", "items = " + items);
-            if (items == null)
-                items = new ArrayList<>();
             adapter.setProjectList(items);
         }
     }

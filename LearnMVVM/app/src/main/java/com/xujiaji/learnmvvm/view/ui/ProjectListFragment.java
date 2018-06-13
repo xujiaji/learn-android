@@ -15,26 +15,24 @@ import com.xujiaji.learnmvvm.viewmodel.ProjectListViewModel;
  */
 public class ProjectListFragment extends BaseFragment<FragmentProjectListBinding, ProjectListViewModel>
 {
-    private ProjectAdapter projectAdapter;
     @Override
     protected void onBinding(FragmentProjectListBinding binding)
     {
-        projectAdapter = new ProjectAdapter(projectClickCallback);
-        binding.projectList.setAdapter(projectAdapter);
+        binding.projectList.setAdapter(new ProjectAdapter(projectClickCallback));
         binding.setIsLoading(true);
     }
 
     @Override
     protected void onObserveViewModel(ProjectListViewModel viewModel)
     {
+        binding.setProjectListViewModel(viewModel);
         viewModel.getProjectListObservable().observe(this, projects ->
         {
             if (projects != null)
             {
                 binding.setIsLoading(false);
-                projectAdapter.setProjectList(projects);
-//                viewModel.items.clear();
-//                viewModel.items.addAll(projects);
+                viewModel.items.clear();
+                viewModel.items.addAll(projects);
             }
         });
     }

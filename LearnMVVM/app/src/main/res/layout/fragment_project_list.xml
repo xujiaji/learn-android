@@ -7,9 +7,9 @@
         <variable
             name="isLoading"
             type="boolean" />
-        
+
         <variable
-            name="viewModel"
+            name="projectListViewModel"
             type="com.xujiaji.learnmvvm.viewmodel.ProjectListViewModel"/>
     </data>
 
@@ -50,7 +50,7 @@
                 android:contentDescription="项目列表"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:items="@{viewModel.items}"
+                app:items="@{projectListViewModel.items}"
                 app:layoutManager="LinearLayoutManager"/>
 
         </LinearLayout>
