@@ -7,7 +7,7 @@
             type="com.xujiaji.learnmvvm.service.model.Project"/>
         <variable
             name="callback"
-            type="com.xujiaji.learnmvvm.view.callback.ProjectClickCallback"/>
+            type="com.xujiaji.learnmvvm.callback.ProjectClickCallback"/>
     </data>
 
     <android.support.v7.widget.CardView

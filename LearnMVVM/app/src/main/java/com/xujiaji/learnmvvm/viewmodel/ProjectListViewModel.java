@@ -6,7 +6,7 @@ import android.arch.lifecycle.LiveData;
 import android.support.annotation.NonNull;
 
 import com.xujiaji.learnmvvm.service.model.Project;
-import com.xujiaji.learnmvvm.service.repository.NetRepository;
+import com.xujiaji.learnmvvm.service.repository.Net;
 
 import java.util.List;
 
@@ -22,10 +22,10 @@ public class ProjectListViewModel extends AndroidViewModel
     private final LiveData<List<Project>> projectListObservable;
 
     @Inject
-    public ProjectListViewModel(@NonNull NetRepository netRepository, @NonNull Application application)
+    public ProjectListViewModel(@NonNull Net net, @NonNull Application application)
     {
         super(application);
-        projectListObservable = netRepository.getProjectList("xujiaji");
+        projectListObservable = net.getProjectList("xujiaji");
     }
 
     public LiveData<List<Project>> getProjectListObservable()

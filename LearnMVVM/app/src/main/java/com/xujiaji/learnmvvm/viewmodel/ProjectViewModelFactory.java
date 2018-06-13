@@ -29,8 +29,8 @@ public class ProjectViewModelFactory implements ViewModelProvider.Factory
     public ProjectViewModelFactory(ViewModelSubComponent viewModelSubComponent)
     {
         creators = new HashMap<>();
-        creators.put(ProjectViewModel.class, () -> viewModelSubComponent.projectViewModel());
-        creators.put(ProjectListViewModel.class, () -> viewModelSubComponent.projectListViewModel());
+        creators.put(ProjectViewModel.class, viewModelSubComponent::projectViewModel);
+        creators.put(ProjectListViewModel.class, viewModelSubComponent::projectListViewModel);
     }
 
     @NonNull

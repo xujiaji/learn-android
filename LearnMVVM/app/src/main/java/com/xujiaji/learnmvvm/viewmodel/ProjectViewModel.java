@@ -11,7 +11,7 @@ import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.xujiaji.learnmvvm.service.model.Project;
-import com.xujiaji.learnmvvm.service.repository.NetRepository;
+import com.xujiaji.learnmvvm.service.repository.Net;
 
 import javax.inject.Inject;
 
@@ -34,7 +34,7 @@ public class ProjectViewModel extends AndroidViewModel
     public ObservableField<Project> project = new ObservableField<>();
 
     @Inject
-    public ProjectViewModel(@NonNull NetRepository netRepository, @NonNull Application application)
+    public ProjectViewModel(@NonNull Net net, @NonNull Application application)
     {
         super(application);
         this.projectID = new MutableLiveData<>();
@@ -46,7 +46,7 @@ public class ProjectViewModel extends AndroidViewModel
                 return ABSENT;
             }
             Log.i(TAG,"ProjectViewModel projectID is " + projectID.getValue());
-            return netRepository.getProjectDetails("xujiaji", projectID.getValue());
+            return net.getProjectDetails("xujiaji", projectID.getValue());
         });
     }
 

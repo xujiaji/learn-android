@@ -1,6 +1,5 @@
 package com.xujiaji.learnmvvm.view.ui;
 
-import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
 import android.databinding.DataBindingUtil;
@@ -15,7 +14,6 @@ import android.view.ViewGroup;
 import com.xujiaji.learnmvvm.R;
 import com.xujiaji.learnmvvm.databinding.FragmentProjectDetailsBinding;
 import com.xujiaji.learnmvvm.di.Injectable;
-import com.xujiaji.learnmvvm.service.model.Project;
 import com.xujiaji.learnmvvm.viewmodel.ProjectViewModel;
 
 import javax.inject.Inject;
@@ -47,7 +45,11 @@ public class ProjectFragment extends Fragment implements Injectable
         super.onActivityCreated(savedInstanceState);
         final ProjectViewModel viewModel = ViewModelProviders.of(this, viewModelFactory)
                 .get(ProjectViewModel.class);
-        viewModel.setProjectID(getArguments().getString(KEY_PROJECT_ID));
+        Bundle bundle = getArguments();
+        if (bundle != null)
+        {
+            viewModel.setProjectID(bundle.getString(KEY_PROJECT_ID));
+        }
 
         binding.setProjectViewModel(viewModel);
         binding.setIsLoading(true);
@@ -57,13 +59,11 @@ public class ProjectFragment extends Fragment implements Injectable
 
     private void observeViewModel(final ProjectViewModel viewModel) {
         // Observe project data
-        viewModel.getObservableProject().observe(this, new Observer<Project>() {
-            @Override
-            public void onChanged(@Nullable Project project) {
-                if (project != null) {
-                    binding.setIsLoading(false);
-                    viewModel.setProject(project);
-                }
+        viewModel.getObservableProject().observe(this, project ->
+        {
+            if (project != null) {
+                binding.setIsLoading(false);
+                viewModel.setProject(project);
             }
         });
     }

@@ -18,7 +18,7 @@ import com.xujiaji.learnmvvm.databinding.FragmentProjectListBinding;
 import com.xujiaji.learnmvvm.di.Injectable;
 import com.xujiaji.learnmvvm.service.model.Project;
 import com.xujiaji.learnmvvm.view.adapter.ProjectAdapter;
-import com.xujiaji.learnmvvm.view.callback.ProjectClickCallback;
+import com.xujiaji.learnmvvm.callback.ProjectClickCallback;
 import com.xujiaji.learnmvvm.viewmodel.ProjectListViewModel;
 
 import java.util.List;
@@ -61,29 +61,21 @@ public class ProjectListFragment extends Fragment implements Injectable
 
     private void observeViewModel(ProjectListViewModel viewModel)
     {
-        viewModel.getProjectListObservable().observe(this, new Observer<List<Project>>()
+        viewModel.getProjectListObservable().observe(this, projects ->
         {
-            @Override
-            public void onChanged(@Nullable List<Project> projects)
+            if (projects != null)
             {
-                if (projects != null)
-                {
-                    binding.setIsLoading(false);
-                    projectAdapter.setProjectList(projects);
-                }
+                binding.setIsLoading(false);
+                projectAdapter.setProjectList(projects);
             }
         });
     }
 
-    private final ProjectClickCallback projectClickCallback = new ProjectClickCallback()
+    private final ProjectClickCallback projectClickCallback = project ->
     {
-        @Override
-        public void onClick(Project project)
+        if (getLifecycle().getCurrentState().isAtLeast(Lifecycle.State.STARTED) && getActivity() instanceof MainActivity)
         {
-            if (getLifecycle().getCurrentState().isAtLeast(Lifecycle.State.STARTED))
-            {
-                ((MainActivity) getActivity()).show(project);
-            }
+            ((MainActivity) getActivity()).show(project);
         }
     };
 }
