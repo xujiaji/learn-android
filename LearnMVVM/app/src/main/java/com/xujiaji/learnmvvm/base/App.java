@@ -1,4 +1,4 @@
-package com.xujiaji.learnmvvm;
+package com.xujiaji.learnmvvm.base;
 
 import android.app.Activity;
 import android.app.Application;

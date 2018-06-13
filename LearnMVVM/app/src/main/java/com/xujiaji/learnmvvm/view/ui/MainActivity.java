@@ -6,12 +6,17 @@ import android.os.Bundle;
 
 import com.xujiaji.learnmvvm.R;
 import com.xujiaji.learnmvvm.service.model.Project;
+import com.xujiaji.learnmvvm.util.ActivityUtils;
+import com.xujiaji.learnmvvm.util.FragmentUtils;
 
 import javax.inject.Inject;
 
 import dagger.android.AndroidInjector;
 import dagger.android.DispatchingAndroidInjector;
 import dagger.android.support.HasSupportFragmentInjector;
+
+import static com.xujiaji.learnmvvm.view.ui.ProjectFragment.KEY_PROJECT_ID;
+
 
 public class MainActivity extends AppCompatActivity implements HasSupportFragmentInjector
 {
@@ -27,23 +32,24 @@ public class MainActivity extends AppCompatActivity implements HasSupportFragmen
 
         if (savedInstanceState == null)
         {
-            ProjectListFragment fragment = new ProjectListFragment();
+            ActivityUtils.addFragmentInActivity(
+                    getSupportFragmentManager(),
+                    FragmentUtils.create(ProjectListFragment.class),
+                    R.id.fragment_container,
+                    ProjectListFragment.class.getSimpleName());
 
-            getSupportFragmentManager().beginTransaction()
-                    .add(R.id.fragment_container, fragment, ProjectListFragment.TAG).commit();
         }
     }
 
 
     public void show(Project project)
     {
-        ProjectFragment projectFragment = ProjectFragment.forProject(project.name);
-
-        getSupportFragmentManager()
-                .beginTransaction()
-                .addToBackStack("project")
-                .replace(R.id.fragment_container,
-                        projectFragment, null).commit();
+        ActivityUtils.replaceFragmentInActivity(
+                getSupportFragmentManager(),
+                FragmentUtils.create(ProjectFragment.class, new String[]{KEY_PROJECT_ID}, new String[]{project.name}),
+                R.id.fragment_container,
+                null,
+                "project");
     }
 
 

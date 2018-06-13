@@ -7,7 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 
-import com.xujiaji.learnmvvm.App;
+import com.xujiaji.learnmvvm.base.App;
 
 import dagger.android.AndroidInjection;
 import dagger.android.support.AndroidSupportInjection;

@@ -2,7 +2,7 @@ package com.xujiaji.learnmvvm.di;
 
 import android.app.Application;
 
-import com.xujiaji.learnmvvm.App;
+import com.xujiaji.learnmvvm.base.App;
 
 import javax.inject.Singleton;
 
