@@ -1,28 +1,20 @@
 package com.xujiaji.learnmvvm.view.ui;
 
-import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.xujiaji.learnmvvm.R;
+import com.xujiaji.learnmvvm.base.BaseViewModelActivity;
 import com.xujiaji.learnmvvm.service.model.Project;
 import com.xujiaji.learnmvvm.util.ActivityUtils;
 import com.xujiaji.learnmvvm.util.FragmentUtils;
-
-import javax.inject.Inject;
-
-import dagger.android.AndroidInjector;
-import dagger.android.DispatchingAndroidInjector;
-import dagger.android.support.HasSupportFragmentInjector;
+import com.xujiaji.learnmvvm.viewmodel.ProjectListViewModel;
 
 import static com.xujiaji.learnmvvm.view.ui.ProjectFragment.KEY_PROJECT_ID;
 
 
-public class MainActivity extends AppCompatActivity implements HasSupportFragmentInjector
+public class MainActivity extends BaseViewModelActivity<ProjectListViewModel>
 {
-
-    @Inject
-    DispatchingAndroidInjector<Fragment> dispatchingAndroidInjector;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -52,10 +44,9 @@ public class MainActivity extends AppCompatActivity implements HasSupportFragmen
                 "project");
     }
 
-
     @Override
-    public AndroidInjector<Fragment> supportFragmentInjector()
+    protected void onObserveViewModel(ProjectListViewModel viewModel)
     {
-        return dispatchingAndroidInjector;
+        Log.e("ViewModel", "MainActivity viewModel:" + viewModel.hashCode());
     }
 }

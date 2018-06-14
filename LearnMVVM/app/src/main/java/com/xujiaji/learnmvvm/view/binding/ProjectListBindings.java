@@ -15,7 +15,7 @@ import java.util.List;
  */
 public class ProjectListBindings
 {
-    @BindingAdapter("app:items")
+    @BindingAdapter("items")
     public static void setItems(RecyclerView recyclerView, List<Project> items)
     {
         ProjectAdapter adapter = (ProjectAdapter) recyclerView.getAdapter();

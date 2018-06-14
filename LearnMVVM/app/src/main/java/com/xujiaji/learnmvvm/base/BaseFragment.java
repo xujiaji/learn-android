@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,8 +42,23 @@ public abstract class BaseFragment<B extends ViewDataBinding, VM extends Android
     {
         super.onActivityCreated(savedInstanceState);
         Class<VM> viewModelClass = ClassUtils.getViewModel(this);
-        final VM viewModel = ViewModelProviders.of(this, mViewModelFactory).get(viewModelClass);
+        final VM viewModel;
+        if (useActivityProviderViewModel() == null)
+        {
+            viewModel = ViewModelProviders.of(this, mViewModelFactory).get(viewModelClass);
+        } else
+        {
+            viewModel = ViewModelProviders.of(useActivityProviderViewModel(), mViewModelFactory).get(viewModelClass);
+        }
         onObserveViewModel(viewModel);
+    }
+
+    /**
+     * 通过Activity来创建ViewModel的情况下调用
+     */
+    protected FragmentActivity useActivityProviderViewModel()
+    {
+        return null;
     }
 
     /**

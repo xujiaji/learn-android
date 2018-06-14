@@ -1,6 +1,8 @@
 package com.xujiaji.learnmvvm.view.ui;
 
 import android.arch.lifecycle.Lifecycle;
+import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 
 import com.xujiaji.learnmvvm.base.BaseFragment;
 import com.xujiaji.learnmvvm.callback.ProjectClickCallback;
@@ -25,6 +27,7 @@ public class ProjectListFragment extends BaseFragment<FragmentProjectListBinding
     @Override
     protected void onObserveViewModel(ProjectListViewModel viewModel)
     {
+        Log.e("ViewModel", "ProjectListFragment viewModel:" + viewModel.hashCode());
         binding.setProjectListViewModel(viewModel);
         viewModel.getProjectListObservable().observe(this, projects ->
         {
@@ -35,6 +38,12 @@ public class ProjectListFragment extends BaseFragment<FragmentProjectListBinding
                 viewModel.items.addAll(projects);
             }
         });
+    }
+
+    @Override
+    protected FragmentActivity useActivityProviderViewModel()
+    {
+        return getActivity();
     }
 
     private final ProjectClickCallback projectClickCallback = project ->
