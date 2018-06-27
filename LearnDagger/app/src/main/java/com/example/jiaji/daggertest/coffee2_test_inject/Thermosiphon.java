@@ -11,6 +11,19 @@ public class Thermosiphon implements Pump {
     @Inject
     ElectricHeater heater;
 
+//    @Inject
+//    public void funTest()
+//    {
+//        System.out.println("funTest()");
+//    }
+//
+//    @Inject
+//    public void funTest(ElectricHeater heater)
+//    {
+//        System.out.println("heater: " + this.heater.hashCode());
+//        System.out.println("funTest(): " + heater.hashCode());
+//    }
+
     @Inject
     public Thermosiphon() {
 

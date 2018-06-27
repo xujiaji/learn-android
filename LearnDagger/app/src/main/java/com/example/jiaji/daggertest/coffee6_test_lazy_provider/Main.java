@@ -12,6 +12,9 @@ import dagger.Lazy;
  */
 public class Main
 {
+//    @Inject
+//    Lazy<LazyEntity> entityLazy;
+
     @Inject
     Provider<LazyEntity> entityLazy;
 
@@ -25,7 +28,7 @@ public class Main
         Main main = DaggerMyComponent.builder()
                 .build()
                 .getMain();
-
+        System.out.println("此时LazyEntity还没有实例化");
         for (int i = 0; i < 3; i++)
         {
             System.out.println(main.entityLazy.get().hashCode());

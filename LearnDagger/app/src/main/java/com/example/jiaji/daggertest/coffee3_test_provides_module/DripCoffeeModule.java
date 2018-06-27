@@ -1,6 +1,7 @@
 package com.example.jiaji.daggertest.coffee3_test_provides_module;
 
 
+import dagger.Binds;
 import dagger.Module;
 import dagger.Provides;
 
@@ -21,12 +22,13 @@ public class DripCoffeeModule
         return new ElectricHeater();
     }
 
-    @Provides
-    Pump providePump(Thermosiphon pump)
-    {
-        System.out.println("providePump");
-        return pump;
-    }
+//    @Provides
+//    Pump providePump(Thermosiphon pump)
+//    {
+//        System.out.println("providePump");
+//        return pump;
+//    }
+
 
     @Provides
     String provideStr()
