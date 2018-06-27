@@ -10,5 +10,8 @@ import javax.inject.Inject;
 public class LazyEntity
 {
     @Inject
-    public LazyEntity(){}
+    public LazyEntity()
+    {
+        System.out.println("LazyEntity()");
+    }
 }
